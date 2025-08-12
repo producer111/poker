@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Texas Poker 勝率計算</title>
+</head>
+<body>
+    <h1>ポーカー勝率計算フォーム</h1>
+
+    <!-- 説明エリア -->
+    <section>
+        <p><strong>※ スート（マーク）の意味：</strong><br>
+        ・S＝♠（スペード）<br>
+        ・H＝♥（ハート）<br>
+        ・D＝♦（ダイヤ）<br>
+        ・C＝♣（クラブ）</p>
+
+        <p><strong>※ ランクの書き方：</strong><br>
+        ・A（エース）・K・Q・J・10〜2（すべて半角）</p>
+
+        <p><strong>※ 入力形式の例：</strong><br>
+        ・あなたの手札：<code>S-A H-K</code><br>
+        ・場のカード：<code>C-10 D-J H-Q</code></p>
+
+        <p><strong>※ ポジションとは？（あなたの座る席）</strong><br>
+        ・<strong>BTN</strong>（Button）… ディーラーボタン。一番有利<br>
+        ・<strong>SB</strong>（Small Blind）… 最初に強制ベット<br>
+        ・<strong>BB</strong>（Big Blind）… 2番目に強制ベット<br>
+        ・<strong>UTG</strong>（Under The Gun）… アクション一番手。最も不利<br>
+        ・<strong>MP</strong>（Middle Position）… 中央席<br>
+        ・<strong>CO</strong>（Cutoff）… ボタンの右隣、2番目に有利</p>
+    </section>
+
+    <!-- 入力フォーム -->
+    <form action="/calculate" method="post">
+        <p>
+            あなたの手札（例：S-A H-K）：
+            <input type="text" name="hand" required />
+        </p>
+        <p>
+            場のカード（例：C-10 D-J H-Q）：
+            <input type="text" name="board" />
+        </p>
+        <p>
+            ポジション（例：BTN）：
+            <input type="text" name="position" required />
+        </p>
+        <p>
+            チップ量：
+            <input type="number" name="chips" required />
+        </p>
+        <p>
+            相手の人数（1〜8）：
+            <input type="number" name="opponents" min="1" max="8" required />
+        </p>
+
+        <button type="submit">勝率を計算！</button>
+        <p>
+    現在のステージを選択してください：
+    <select name="stage" required>
+        <option value="preflop">プリフロップ（手札のみ）</option>
+        <option value="flop">フロップ（場に3枚）</option>
+        <option value="turn">ターン（場に4枚）</option>
+        <option value="river">リバー（場に5枚）</option>
+    </select>
+</p>
+
+        
+    </form>
+
+    <!-- エラー表示 -->
+    <p th:if="${error}" style="color: red;">
+        エラー：<span th:text="${error}"></span>
+    </p>
+</body>
+</html>

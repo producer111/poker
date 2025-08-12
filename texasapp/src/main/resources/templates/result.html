@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>計算結果</title>
+</head>
+<body>
+    <h1>ポーカー勝率計算結果</h1>
+
+    <p><strong>プレイヤー名：</strong> <span th:text="${player.name}"/></p>
+    <p><strong>ポジション：</strong> <span th:text="${player.position}"/></p>
+    <p><strong>チップ：</strong> <span th:text="${player.chips}"/></p>
+    <p><strong>手札：</strong> <span th:text="${hand}"/></p>
+    <p><strong>場のカード：</strong> <span th:text="${board}"/></p>
+    <p><strong>現在の役：</strong> <span th:text="${rank}"/></p>
+    <p><strong>勝率：</strong> <b th:text="${winRate}"/>%</p>
+	<p><strong>ステージ：</strong> <span th:text="${stage}"/></p>
+    <br>
+    <a href="/">フォームに戻る</a>
+</body>
+</html>
